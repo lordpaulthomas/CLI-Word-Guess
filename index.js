@@ -1,6 +1,6 @@
 var Word = require("./Word");
 var inquirer = require("inquirer");
-
+var colors = require('colors');
 
 
 
@@ -30,7 +30,7 @@ function getUserGuess() {
     .prompt([
       {
         type: "input",
-        message: "Guess a letter",
+        message: "Guess a letter".yellow,
         name: "letterGuess"
       }
     ])
@@ -38,24 +38,27 @@ function getUserGuess() {
       userGuess = response.letterGuess
       word.checker(userGuess.toLowerCase())
       if (word.checkerReturn(userGuess)) {
-        console.log("\nCORRECT!!!\n")
+        console.log("\nCORRECT!!!".green +"\n")
         word.wordMaker()
         console.log("\n")
         if (!checkForWin(word)) {
           getUserGuess()
         }
-        else (console.log("You got it!\n"))
+        else (console.log("You got it!\n".rainbow))
       }
       else {
         lives--
         if (lives === 0) {
-          console.log("Game Over\n")
+          console.log("\nINCORRECT!!!".red + "\n\nYou have ".magenta + lives.toString().yellow + " guesses remaining\n".magenta)
+          word.wordMaker()
+          console.log("\n")
+          console.log("Game Over\n".rainbow)
 
           inquirer
             .prompt([
               {
                 type: "confirm",
-                message: "Wanna Play Again",
+                message: "Wanna Play Again".yellow,
                 name: "confirm",
                 default: false
               }
@@ -64,12 +67,12 @@ function getUserGuess() {
                 console.log("\nToo bad\n")
               }
               else {
-                console.log("\nThanks for playing!\n\nSee you next time!\n")
+                console.log("\nThanks for playing!\n\nSee you next time!\n".rainbow)
               }
             })
         }
         else {
-          console.log("\nINCORRECT!!!\n\nYou have " + lives + " guesses remaining\n")
+          console.log("\nINCORRECT!!!".red + "\n\nYou have ".magenta + lives.toString().yellow + " guesses remaining\n".magenta)
           word.wordMaker()
           console.log("\n")
           getUserGuess()

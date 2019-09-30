@@ -1,13 +1,15 @@
+var colors = require('colors');
+
 var Letter = function(char){
   this.char = char;
   this.correctGuess = false;
 }
 Letter.prototype.letterReturn = function (){
   if(this.correctGuess){
-    return this.char
+    return this.char.cyan
   }
   else{
-    return '_';
+    return '_'.cyan;
   }
 }
 
