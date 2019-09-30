@@ -44,4 +44,4 @@ Required node_modules
 Example Video GIF
 ----------------------
 
-<img src="https://media.giphy.com/media/cnR1fBGw90IyAyA7Xn/giphy.gif" width="600" height="500" />
+<img src="https://media.giphy.com/media/YmQQ7Q2SO67RitZ2rd/giphy.gif" width="600" height="500" />
