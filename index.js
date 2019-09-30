@@ -44,7 +44,31 @@ function getUserGuess() {
         if (!checkForWin(word)) {
           getUserGuess()
         }
-        else (console.log("You got it!\n".rainbow))
+        else {
+          (console.log("You got it!\n".rainbow))
+          inquirer
+          .prompt([
+            {
+              type: "confirm",
+              message: "Wanna Play Again".yellow,
+              name: "confirm",
+              default: false
+            }
+          ]).then(function (response) {
+            if (response.confirm) {
+              lives = 5;
+              word = getWordToGuess()
+              console.log("\n")
+              word.wordMaker()
+              console.log("\n")
+              getUserGuess()
+            }
+            else {
+              console.log("\nThanks for playing!\n\nSee you next time!\n".rainbow)
+            }
+          })
+        }
+
       }
       else {
         lives--
@@ -64,7 +88,12 @@ function getUserGuess() {
               }
             ]).then(function (response) {
               if (response.confirm) {
-                console.log("\nToo bad\n")
+                lives = 5;
+                word = getWordToGuess()
+                console.log("\n")
+                word.wordMaker()
+                console.log("\n")
+                getUserGuess()
               }
               else {
                 console.log("\nThanks for playing!\n\nSee you next time!\n".rainbow)
@@ -80,6 +109,11 @@ function getUserGuess() {
       }
     }
     )
+    .catch(function(err){
+      if (err){
+        return console.log(err)
+      }
+    })
 }
 
 
