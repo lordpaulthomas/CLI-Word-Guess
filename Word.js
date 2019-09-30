@@ -15,7 +15,13 @@ var Word = function (word) {
     console.log(arr.join(" "));
 
   }
-
+  this.checkerReturn = function (guess){
+    for(let i = 0; i < this.word.length;i++){
+      if(this.wordArray[i].char === guess){
+        return true
+      }
+    }return false
+  }
   this.checker = function (guess) {
     // console.log('hello')
     for (let i = 0; i < this.wordArray.length; i++) {
@@ -24,6 +30,7 @@ var Word = function (word) {
       }
       else {
         this.wordArray[i].correctGuess = this.wordArray[i].letterCheck(guess)
+      
       }
     }
   }

@@ -7,7 +7,6 @@ var inquirer = require("inquirer");
 
 
 
-
 function getWordToGuess() {
   var randomWordArray = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
   var randomNumber = Math.floor((Math.random() * 11) + 1)
@@ -17,9 +16,15 @@ function getWordToGuess() {
 }
 
 
+lives = 5;
 var word = getWordToGuess()
-var guessedLetters = [];
+console.log("\n")
 word.wordMaker();
+console.log("\n")
+getUserGuess()
+
+
+
 function getUserGuess() {
   inquirer
     .prompt([
@@ -31,30 +36,54 @@ function getUserGuess() {
     ])
     .then(function (response) {
       userGuess = response.letterGuess
-      lives = 5;
-      
-      word.wordMaker()
-      word.checker(userGuess)
-    
-      guessedLetters.push(userGuess + " - ")
-      console.log("\nGuesses Left: " + lives)
-      console.log("Guessed so far - " + guessedLetters.join(" "))
-      word.wordMaker()
-      if (!checkForWin(word)) {
-        getUserGuess()
+      word.checker(userGuess.toLowerCase())
+      if (word.checkerReturn(userGuess)) {
+        console.log("\nCORRECT!!!\n")
+        word.wordMaker()
+        console.log("\n")
+        if (!checkForWin(word)) {
+          getUserGuess()
+        }
+        else (console.log("You got it!\n"))
       }
-      else (console.log("You got it!"))
+      else {
+        lives--
+        if (lives === 0) {
+          console.log("Game Over\n")
 
+          inquirer
+            .prompt([
+              {
+                type: "confirm",
+                message: "Wanna Play Again",
+                name: "confirm",
+                default: false
+              }
+            ]).then(function (response) {
+              if (response.confirm) {
+                console.log("\nToo bad\n")
+              }
+              else {
+                console.log("\nThanks for playing!\n\nSee you next time!\n")
+              }
+            })
+        }
+        else {
+          console.log("\nINCORRECT!!!\n\nYou have " + lives + " guesses remaining\n")
+          word.wordMaker()
+          console.log("\n")
+          getUserGuess()
+        }
+      }
     }
     )
 }
 
-getUserGuess()
 
 
 
 const checkForWin = (string) => {
- 
+
   for (let i = 0; i < string.wordArray.length; i++) {
 
     if (string.wordArray[i].correctGuess === false) {
