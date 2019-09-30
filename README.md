@@ -39,6 +39,9 @@ Required node_modules
 
 ``` inquirer ```
 
+``` colors ```
 
 Example Video GIF
 ----------------------
+
+<img src="https://media.giphy.com/media/cnR1fBGw90IyAyA7Xn/giphy.gif" width="600" height="500" />
