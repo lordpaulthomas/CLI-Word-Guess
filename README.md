@@ -2,7 +2,7 @@
 
 Licensing Information: READ LICENSE
 ---
-Project source can be downloaded from https://github.com/lordpaulthomas/liri-node-app
+Project source can be downloaded from https://github.com/lordpaulthomas/CLI-Word-Guess
 ----
 Author
 -----------
